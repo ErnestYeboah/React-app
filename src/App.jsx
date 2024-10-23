@@ -5,7 +5,7 @@
 // import Details from "./Pages/detailsPage/details";
 
 import Container from "./expense-tracker/container";
-import ExpenseGlobalState from "./expense-tracker/context/context";
+import ExpenseGlobalState from "./expense-tracker/context";
 
 function App() {
   return (

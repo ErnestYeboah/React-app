@@ -1,19 +1,18 @@
 import { useContext } from "react";
-import { ExpenseGlobalContext } from "./context/context";
+import { ExpenseGlobalContext } from "./context";
+import { nanoid } from "nanoid";
 
 export default function IncomeCards() {
-  const { newIncomes } = useContext(ExpenseGlobalContext);
-
+  const { incomesSummary } = useContext(ExpenseGlobalContext);
   return (
     <div>
       <h3>Income</h3>
-
-      {newIncomes &&
-        newIncomes.map((income, index) => {
+      {incomesSummary &&
+        incomesSummary.map((item) => {
           return (
-            <div key={index} className="table">
-              <p>{income.description} </p>
-              <p>${income.amount}</p>
+            <div key={nanoid} className="table">
+              <p>{item.description} </p>
+              <p>${item.amount}</p>
             </div>
           );
         })}

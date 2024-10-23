@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ExpenseGlobalContext } from "./context/context";
+import { ExpenseGlobalContext } from "./context";
 
 export default function Modal() {
   const {
@@ -7,10 +7,9 @@ export default function Modal() {
     setIsActive,
     description,
     setDescription,
-    typeOfTransact,
-    setAmount,
     amount,
-
+    setAmount,
+    typeOfTransact,
     setTypeOfTransact,
     getFormData,
   } = useContext(ExpenseGlobalContext);
@@ -31,9 +30,9 @@ export default function Modal() {
               id="description"
               type="text"
               name="description"
+              placeholder="type a description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="type a description"
             />
           </div>
           <div className="input__group">
@@ -74,7 +73,7 @@ export default function Modal() {
         </div>
 
         <div className="btns">
-          <button>Cancel</button>
+          <button onClick={() => setIsActive(false)}>Cancel</button>
           <button onClick={getFormData}>Add</button>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Modal from "./modal";
-import { ExpenseGlobalContext } from "./context/context";
+import { ExpenseGlobalContext } from "./context";
 
 export default function Nav() {
   const { setIsActive } = useContext(ExpenseGlobalContext);

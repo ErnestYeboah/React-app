@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { ExpenseGlobalContext } from "./context/context";
+import { ExpenseGlobalContext } from "./context";
 
 export default function TotalAmount() {
-  const { income, expense, total } = useContext(ExpenseGlobalContext);
+  const { formData, total } = useContext(ExpenseGlobalContext);
 
   return (
     <div className="total__amount-container">
@@ -10,11 +10,11 @@ export default function TotalAmount() {
 
       <div className="total__amount">
         <div>
-          <h1 data-type="income">${income}</h1>
+          <h1 data-type="income">${formData.income}</h1>
           <p>Total Income </p>
         </div>
         <div>
-          <h1 data-type="expenses">${expense}</h1>
+          <h1 data-type="expenses">${formData.expense}</h1>
           <p>Total Expense </p>
         </div>
       </div>

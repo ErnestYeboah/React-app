@@ -1,21 +1,19 @@
 import { useContext } from "react";
-import { ExpenseGlobalContext } from "./context/context";
+import { ExpenseGlobalContext } from "./context";
 
 export default function ExpenseCards() {
-  const { newExpense } = useContext(ExpenseGlobalContext);
-
-  console.log(newExpense);
+  const { expensesSummary } = useContext(ExpenseGlobalContext);
 
   return (
     <div>
       <h3>Expense</h3>
 
-      {newExpense &&
-        newExpense.map((expense, index) => {
+      {expensesSummary &&
+        expensesSummary.map((item, index) => {
           return (
             <div key={index} className="table">
-              <p>{expense.description} </p>
-              <p>${expense.amount}</p>
+              <p>{item.description} </p>
+              <p>${item.amount}</p>
             </div>
           );
         })}

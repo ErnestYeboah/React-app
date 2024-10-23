@@ -8,36 +8,37 @@ export default function ExpenseGlobalState({ children }) {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [typeOfTransact, setTypeOfTransact] = useState("");
-  const [income, setIncome] = useState("");
-  const [expense, setExpense] = useState("");
-  const [desc, setDesc] = useState("");
+  const [formData, setFormData] = useState({
+    description: "",
+    income: "",
+    expense: "",
+  });
+
+  const [expensesSummary, setExpensesSummary] = useState([]);
+  const [incomesSummary, setIncomesSummary] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const [newExpense, setNewExpense] = useState([]);
-  const [newIncomes, setNewIncome] = useState([]);
+  useEffect(() => {
+    localStorage.setItem("Expenses", JSON.stringify(expensesSummary));
+  }, [expensesSummary]);
 
   function getFormData() {
-    checkTypeOfTransction();
-    setDesc(description);
-    addNewObject();
-    setDescription("");
+    setFormData((p) => ({
+      ...p,
+      description: description,
+      income: typeOfTransact === "income" ? Number(amount) : formData.income,
+      expense: typeOfTransact === "expense" ? Number(amount) : formData.expense,
+    }));
+
     setAmount("");
+    setDescription("");
     setTypeOfTransact("");
+    addNewSummary();
     setIsActive(false);
   }
 
-  function addNewObject() {
-    if (typeOfTransact === "income") {
-      setNewIncome((i) => [...i, { description: description, amount: amount }]);
-    } else {
-      setNewExpense((e) => [
-        ...e,
-        { description: description, amount: amount },
-      ]);
-    }
-  }
-
   function getTotal() {
+    const { income, expense } = formData;
     if (income || expense) {
       setTotal(income || expense);
     }
@@ -46,17 +47,25 @@ export default function ExpenseGlobalState({ children }) {
     }
   }
 
-  function checkTypeOfTransction() {
+  function addNewSummary() {
     if (typeOfTransact === "income") {
-      setIncome(Number(amount));
-    }
-    if (typeOfTransact === "expense") {
-      setExpense(Number(amount));
+      const cpyIncomesSummary = [
+        ...incomesSummary,
+        { description: description, amount: amount },
+      ];
+      setIncomesSummary(cpyIncomesSummary);
+    } else {
+      const cpyExpensesSummary = [
+        ...expensesSummary,
+        { description: description, amount: amount },
+      ];
+      setExpensesSummary(cpyExpensesSummary);
     }
   }
+
   useEffect(() => {
     getTotal();
-  }, [income, expense]);
+  }, [formData.income, formData.expense]);
 
   return (
     <ExpenseGlobalContext.Provider
@@ -69,13 +78,11 @@ export default function ExpenseGlobalState({ children }) {
         setAmount,
         typeOfTransact,
         setTypeOfTransact,
-        income,
-        expense,
-        desc,
         getFormData,
+        formData,
         total,
-        newExpense,
-        newIncomes,
+        expensesSummary,
+        incomesSummary,
       }}
     >
       {children}
