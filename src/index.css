@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+button {
+  border: none;
+  padding: 0.5em 1em;
+}
+
+body {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+::before,
+::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+}
+
+a {
+  text-decoration-line: none;
+  color: inherit;
+}
+
+:root {
+  --gap: 1rem;
+  --shadow: 0px 4px 4px rgba(0 0 0 / 0.3);
+  --radius: 1rem;
+}
+
+.star {
+  background-color: yellow;
+}
+
+.scroll__watcher {
+  height: 5px;
+  position: fixed;
+  top: 4.5rem;
+  left: 0;
+  background-color: red;
+}
