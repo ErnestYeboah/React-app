@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ExpenseGlobalContext } from "./context";
 
 export default function Chart() {
-  const { formData, total } = useContext(ExpenseGlobalContext);
+  const { total } = useContext(ExpenseGlobalContext);
 
   let income = total;
   income = String(income).slice(0, 2);
